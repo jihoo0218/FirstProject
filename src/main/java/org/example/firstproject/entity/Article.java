@@ -1,8 +1,6 @@
 package org.example.firstproject.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +11,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
+@Getter
+@Setter
 public class Article {
     @Id// 대표값
     @GeneratedValue//1,2,3 자동생성

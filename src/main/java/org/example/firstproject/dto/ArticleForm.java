@@ -8,11 +8,12 @@ import org.example.firstproject.entity.Article;
 @ToString
 public class ArticleForm {
 
+    private Long id;
     private String title;
     private String content;
 
     public Article toEntity() {
         return new Article(
-                null, title, content);
+                id, title, content);
     }
 }
