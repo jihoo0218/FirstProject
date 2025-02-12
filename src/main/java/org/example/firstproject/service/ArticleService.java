@@ -50,7 +50,9 @@ public class ArticleService {
 
         // 4: 업데이트
         target.patch(article);
+        log.info("target : "+target.toString());
         Article updated = articleRepository.save(target);
+        log.info("updated 내용 : "+updated.toString());
         return updated;
     }
 
@@ -65,6 +67,7 @@ public class ArticleService {
         // 대상 삭제
         articleRepository.delete(target);
         //데이터 변환
+        log.info("삭제 완료"+target.toString());
         return target;
     }
     @Transactional // 해당메소드를 트랜잭션으로 묶는다.
