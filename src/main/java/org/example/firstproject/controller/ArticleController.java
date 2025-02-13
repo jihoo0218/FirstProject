@@ -2,8 +2,10 @@ package org.example.firstproject.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.firstproject.dto.ArticleForm;
+import org.example.firstproject.dto.CommentDto;
 import org.example.firstproject.entity.Article;
 import org.example.firstproject.repository.ArticleRepository;
+import org.example.firstproject.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @Slf4j // 로깅을 위한 골뱅이 (어노테이션)
 public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
     @GetMapping("/articles/new")
     public String newArticleForm(){
         return "articles/new";
@@ -45,8 +48,10 @@ public class ArticleController {
 
         // 1: id로 데이터를 가져옴!
         Article articleEntity= articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentDtos= commentService.comments(id);
         //2 : 가져온 데이터를 모델에 등록!
         model.addAttribute("article",articleEntity);
+        model.addAttribute("commentDtos",commentDtos);
         //3 : 보여줄 페이지를 설정!
         return "articles/show";
     }
