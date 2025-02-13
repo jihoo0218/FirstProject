@@ -133,24 +133,27 @@ class CommentRepositoryTest {
         /*Case 4 : 공백이 있는 모든 댓글 조회*/
         {
             //입력데이터를 준비
-
+            String nickname = " ";
             // 실제 수행
-
+            List<Comment> comments= commentRepository.findByNickname(nickname);
             // 예상 결과
-
+            List<Comment> expected = Arrays.asList();
             // 검증
-
+            assertEquals(expected.toString(),comments.toString(),"공백이 있는 모든 댓글 출력");
         }
-        /*Case 5 : "i"가 포함되는 모든 댓글 조회*/
+        /*Case 5 : 단어에 i를 포함한 댓글 찾기*/
         {
             //입력데이터를 준비
-
+            String nickname = "i";
             // 실제 수행
-
+            List<Comment> comments= commentRepository.findByNicknameContaining(nickname);
             // 예상 결과
-
+            Comment a = new Comment(2L, new Article(4L, "영화", "댓글"), "Kim", "아이 앰 샘");
+            Comment b = new Comment(5L, new Article(5L, "푸드", "마니"), "Kim", "햄버거");
+            Comment c = new Comment(8L, new Article(6L, "취미", "부탁"), "Kim", "영화");
+            List<Comment> expected = Arrays.asList(a,b,c);
             // 검증
-
+            assertEquals(expected.toString(),comments.toString(),"i를 포함한 모든 댓글 출력");
         }
     }
 }

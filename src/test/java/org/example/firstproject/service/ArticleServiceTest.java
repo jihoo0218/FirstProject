@@ -5,13 +5,14 @@ import org.example.firstproject.entity.Article;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest //해당 클래스는 스프링 부트와 연동되어 테스팅 된다
 class ArticleServiceTest {
     @Autowired ArticleService articleService;
@@ -81,6 +82,7 @@ class ArticleServiceTest {
 
     @Test
     @Transactional
+    @Rollback (false)
     void update_성공_존재하는_id와_title만있는_DTO() {
         //예상
         Long id = 1L;
@@ -95,6 +97,7 @@ class ArticleServiceTest {
     }
     @Test
     @Transactional
+
     void update_실패____존재하지_않는_id의_dto() {
         //예상
         Long id = -1L;
@@ -123,6 +126,7 @@ class ArticleServiceTest {
 
     @Test
     @Transactional
+    @Rollback (false)
     void delete_성공_존재하는id입력() {
         //예상
         Long id = 1L;
