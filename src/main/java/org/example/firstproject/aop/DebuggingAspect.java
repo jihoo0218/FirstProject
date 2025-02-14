@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component // IoC 컨테이너가 해당 객체를 생성 관리
 @Slf4j
 public class DebuggingAspect {
-    //대상 메소드 선택 : CommentService#create()
-    @Pointcut("execution(* org.example.firstproject.service.CommentService.*(..))")
+    //대상 메소드 선택 : api에 있는 모든 메소드
+    @Pointcut("execution(* org.example.firstproject.api.*.*(..))")
     private void cut(){
 
     }
